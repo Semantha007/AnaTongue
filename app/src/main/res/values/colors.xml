@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#939393</color>
+    <color name="brown">#644A11</color>
+    <color name="blue">#3C8DC4</color>
+    <color name="sea_shell">#FFF0F0</color>
+
+    <color name="primary_color">#3A94D0</color>
+    <color name="primary_color_dark">#00d8d7</color>
+    <color name="accent_color">#448AFF</color>
+
+
+</resources>
