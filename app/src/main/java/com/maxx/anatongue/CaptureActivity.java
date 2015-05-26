@@ -14,6 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,12 +28,15 @@ public class CaptureActivity extends ActionBarActivity implements SurfaceHolder.
 
     private static final String TAG = "Capture";
 
+    private int cameraId = 0;
+
     Camera camera;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
     boolean previewing = false;
 
     Button snapButton;
+    Button changeCameraButton;
 
     Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {
@@ -89,11 +93,15 @@ public class CaptureActivity extends ActionBarActivity implements SurfaceHolder.
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
         snapButton = (Button) findViewById(R.id.snap);
+        changeCameraButton = (Button) findViewById(R.id.changeCamera);
+
         snapButton.setOnClickListener(this);
-        mkDiectory();
+        changeCameraButton.setOnClickListener(this);
+
+        mkDirectory();
     }
 
-    private void mkDiectory() {
+    private void mkDirectory() {
         File imageDirectory = new File(Environment.getExternalStorageDirectory() + "/AnaTongue/");
         // Check if the directory exists
         if (!imageDirectory.exists()) {
@@ -134,7 +142,31 @@ public class CaptureActivity extends ActionBarActivity implements SurfaceHolder.
             if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT)
                 camera = Camera.open(i);
         }*/
-        camera = Camera.open();
+
+        cameraId = findFrontFacingCamera();
+        if (cameraId < 0) {
+            camera = Camera.open();
+            Toast.makeText(this, "No front facing camera found.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            camera = Camera.open(cameraId);
+        }
+    }
+
+    private int findFrontFacingCamera() {
+        int cameraId = -1;
+        // Search for the front facing camera
+        int numberOfCameras = Camera.getNumberOfCameras();
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+                Log.d(TAG, "Camera found");
+                cameraId = i;
+                break;
+            }
+        }
+        return cameraId;
     }
 
     @Override
@@ -151,6 +183,9 @@ public class CaptureActivity extends ActionBarActivity implements SurfaceHolder.
         switch (v.getId()){
             case R.id.snap:
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+                break;
+            case R.id.changeCamera:
+
                 break;
             default:
                 break;
