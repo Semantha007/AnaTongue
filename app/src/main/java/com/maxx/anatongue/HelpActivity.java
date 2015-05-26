@@ -1,4 +1,4 @@
-package com.maxx.anatounge;
+package com.maxx.anatongue;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,7 +8,7 @@ import android.view.MenuItem;
 /**
  * Created by maxx on 5/22/15.
  */
-public class HelpActivity extends ActionBarActivity{
+public class HelpActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
 

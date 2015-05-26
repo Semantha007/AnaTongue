@@ -1,36 +1,37 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <SurfaceView
+        android:id="@+id/camerapreview"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
 
-        <RelativeLayout
-            android:id="@+id/preview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-        </RelativeLayout>
-
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/buttonClick"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/primary_color"
-        android:onClick="snap"
-        android:text="Snap!"
-        android:textColor="@color/white">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
 
-    </Button>
+        <Button
+            android:id="@+id/snap"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"       
+            android:background="@color/blue"
+            android:text="Snap"
+            android:textColor="@color/white" />
 
-</LinearLayout>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/blue" />
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,4 +1,4 @@
-package com.maxx.anatounge;
+package com.maxx.anatongue;
 
 import android.content.Intent;
 import android.os.Bundle;
